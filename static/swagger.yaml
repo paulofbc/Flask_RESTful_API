@@ -1,0 +1,137 @@
+swagger: "2.0"
+info:
+  description: "Esse é um projeto de uma seletiva de estágio para o Cesar Labs."
+  version: "1.0.0"
+  title: "Swagger Movies"
+  contact:
+    email: "cavalcanti.paulofb@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost"
+tags:
+- name: "Movie"
+  description: ""
+schemes:
+- "https"
+- "http"
+paths:
+  /movies:
+    post:
+      tags:
+      - "Movie"
+      summary: "Adiciona um Movie no banco de dados"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Adiciona um Movie no banco de dados"
+        required: true
+        schema:
+          $ref: "#/definitions/Movie"
+      responses:
+        "201":
+          description: "Filme Adicionado!"
+          schema:
+            example:
+              data:
+                id: 01
+                title: "Wonder Woman"
+                year: 2017
+                genre: "Adventure"
+    get:
+      tags:
+      - "Movie"
+      summary: "Busca todos os filmes no banco de dados"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Ok"
+          schema:
+            type: "object"
+            properties: 
+              Movies:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Movie"
+  /movies/<id>:
+    put:
+      tags:
+      - "Movie"
+      summary: "Atualiza um filme existente no banco de dados indicado pelo id"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Atualiza um filme existente no banco de dados"
+        required: true
+        schema:
+          $ref: "#/definitions/Movie"
+      responses:
+        "200":
+          description: "Filme Atualizado!"
+          schema:
+            example:
+              data:
+                id: 01
+                title: "Extraction"
+                year: 2020
+                genre: "Horror"
+    get:
+      tags:
+      - "Movie"
+      summary: "Busca um filme no banco de dados indicado pelo id"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Ok"
+          schema:
+            type: "object"
+            properties: 
+              Movies:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Movie"
+    delete:
+      tags:
+      - "Movie"
+      summary: "Deleta um filme no banco de dados indicado pelo id"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Ok"
+definitions:
+  Movie:
+    type: "object"
+    required:
+    - "title"
+    - "year"
+    - "genre"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      title:
+        type: "string"
+        format: "string"
+      year:
+        type: "integer"
+        format: "int64"
+      genre:
+        type: "string"
+        format: "string"
